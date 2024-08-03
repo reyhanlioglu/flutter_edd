@@ -1,0 +1,4 @@
+enum WidgetEventSenderId {
+  dashboardChangeCurrencyButton,
+  ;
+}

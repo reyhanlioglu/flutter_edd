@@ -1,0 +1,4 @@
+enum WidgetEventReceiverId {
+  dashboardAssetSummaryCard,
+  ;
+}
