@@ -7,10 +7,10 @@ part 'dashboard_asset_summary_state.dart';
 
 class DashboardAssetSummaryCubit extends Cubit<DashboardAssetSummaryState> with WidgetEventListener {
   DashboardAssetSummaryCubit() : super(DashboardAssetSummaryState()) {
-    listenEvent(
-        eventType: WidgetEventTextSetText,
-        onEventReceived: (event) {
-          print('TEST: Data is ${event.data}');
-        });
+    listenDataEvent<WidgetEventTextSetText, WidgetEventTextSetTextData>(
+      onEventReceived: (event) {
+        print('TEST: Data is ${event.text}');
+      },
+    );
   }
 }

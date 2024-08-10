@@ -1,5 +1,5 @@
-
 import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event.dart';
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_data.dart';
 
 class WidgetEventButtonSetEnableStatus extends WidgetEvent {
   final bool isEnabled;
@@ -13,7 +13,12 @@ class WidgetEventButtonSetText extends WidgetEvent {
   WidgetEventButtonSetText(this.isEnabled);
 }
 
-class WidgetEventTextSetText extends WidgetEvent {
+class WidgetEventTextSetText<WidgetEventTextSetTextData> extends WidgetDataEvent {
+  WidgetEventTextSetText({required super.data});
+}
 
-  WidgetEventTextSetText({super.data});
+class WidgetEventTextSetTextData extends WidgetEventData {
+  final String text;
+
+  WidgetEventTextSetTextData(this.text);
 }
