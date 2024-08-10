@@ -10,7 +10,7 @@ mixin WidgetEventListener<T> on Cubit<T> {
   final List<StreamSubscription> streamSubscriptionList = [];
 
   void listenEvent({
-    required WidgetEventType eventType,
+    required Type eventType,
     required Function(WidgetEvent event) onEventReceived,
     WidgetEventSenderId? senderId,
     WidgetEventReceiverId? receiverId,

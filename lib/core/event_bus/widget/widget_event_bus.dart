@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:event_driven_design/core/event_bus/widget/widget_event_type.dart';
 import 'package:event_driven_design/core/event_bus/widget/widget_event_receiver_id.dart';
 import 'package:event_driven_design/core/event_bus/widget/widget_event_sender_id.dart';
+import 'package:event_driven_design/core/event_bus/widget/widget_event_type.dart';
 import 'package:rxdart/rxdart.dart';
 
 class WidgetEventBus {
@@ -13,40 +13,23 @@ class WidgetEventBus {
   final BehaviorSubject<WidgetEvent> _bus = BehaviorSubject();
 
   void sendEvent({
-    required WidgetEventType eventType,
-    dynamic data,
-    WidgetEventSenderId? senderId,
-    WidgetEventReceiverId? receiverId,
+    required WidgetEvent widgetEvent,
   }) {
-    _bus.add(WidgetEvent(type: eventType, data: data, senderId: senderId, receiverId: receiverId));
+    _bus.add(widgetEvent);
   }
 
   StreamSubscription listenEvent({
-    required WidgetEventType eventType,
+    required Type eventType,
     required Function(WidgetEvent event) onEventReceived,
     WidgetEventSenderId? senderId,
     WidgetEventReceiverId? receiverId,
   }) {
     return _bus.listen((data) {
-      if (data.type == eventType &&
+      if (data.runtimeType == eventType &&
           (senderId == null || senderId == data.senderId) &&
           (receiverId == null || receiverId == data.receiverId)) {
         onEventReceived(data);
       }
     });
   }
-}
-
-class WidgetEvent {
-  final WidgetEventType type;
-  final dynamic data;
-  final WidgetEventSenderId? senderId;
-  final WidgetEventReceiverId? receiverId;
-
-  WidgetEvent({
-    required this.type,
-    required this.data,
-    required this.senderId,
-    required this.receiverId,
-  });
 }
