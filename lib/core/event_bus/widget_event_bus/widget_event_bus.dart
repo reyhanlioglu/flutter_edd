@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:event_driven_design/core/event_bus/widget/widget_event_receiver_id.dart';
-import 'package:event_driven_design/core/event_bus/widget/widget_event_sender_id.dart';
-import 'package:event_driven_design/core/event_bus/widget/widget_event_type.dart';
+
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event.dart';
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_receiver_id.dart';
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_sender_id.dart';
 import 'package:rxdart/rxdart.dart';
 
 class WidgetEventBus {
