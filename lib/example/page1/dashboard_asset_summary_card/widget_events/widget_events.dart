@@ -1,24 +1,9 @@
 import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event.dart';
-import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_data.dart';
 
-class WidgetEventButtonSetEnableStatus extends WidgetEvent {
-  final bool isEnabled;
-
-  WidgetEventButtonSetEnableStatus(this.isEnabled, {super.senderId, super.receiverId});
+class WidgetEventSetEnableStatus<bool> extends WidgetDataEvent {
+  WidgetEventSetEnableStatus({required super.data});
 }
 
-class WidgetEventButtonSetText extends WidgetEvent {
-  final bool isEnabled;
-
-  WidgetEventButtonSetText(this.isEnabled);
-}
-
-class WidgetEventTextSetText<String> extends WidgetDataEvent {
-  WidgetEventTextSetText({required super.data});
-}
-
-class WidgetEventTextSetTextData extends WidgetEventData {
-  final String text;
-
-  WidgetEventTextSetTextData(this.text);
+class WidgetEventSetText<String> extends WidgetDataEvent {
+  WidgetEventSetText({required super.data});
 }

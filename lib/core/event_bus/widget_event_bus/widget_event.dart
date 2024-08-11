@@ -1,22 +1,22 @@
+import 'package:event_driven_design/core/event_bus/base_event_bus/base_event.dart';
 import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_bus.dart';
-import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_receiver_id.dart';
-import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_sender_id.dart';
 
-abstract class WidgetEvent<T> {
-  final WidgetEventSenderId? senderId;
-  final WidgetEventReceiverId? receiverId;
-
-  WidgetEvent({this.senderId, this.receiverId});
+abstract class WidgetEvent<WidgetId> extends BaseEvent<WidgetId> {
+  WidgetEvent({super.senderId, super.receiverId});
 }
 
-abstract class WidgetDataEvent<T> extends WidgetEvent<T> {
-  final T data;
-
-  WidgetDataEvent({required this.data, super.senderId, super.receiverId});
+abstract class WidgetDataEvent<WidgetData, WidgetId> extends BaseDataEvent<WidgetData, WidgetId> {
+  WidgetDataEvent({required super.data, super.senderId, super.receiverId});
 }
 
-extension WidgetEventTypeExtension on WidgetEvent {
+extension WidgetEventExtension on WidgetEvent {
   void send() {
-    WidgetEventBus.instance.sendEvent(widgetEvent: this);
+    WidgetEventBus.instance.sendEvent(event: this);
+  }
+}
+
+extension WidgetDataEventExtension on WidgetDataEvent {
+  void send() {
+    WidgetEventBus.instance.sendEvent(event: this);
   }
 }

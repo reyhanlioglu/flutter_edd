@@ -1,4 +1,4 @@
-import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_bus.dart';
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event.dart';
 import 'package:event_driven_design/example/page1/dashboard_asset_summary_card/dashboard_asset_summary_card.dart';
 import 'package:event_driven_design/example/page1/dashboard_asset_summary_card/widget_events/widget_events.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +20,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void test() {
     Future.delayed(const Duration(seconds: 3), () {
-      WidgetEventBus.instance.sendEvent(
-        widgetEvent: WidgetEventTextSetText<String>(data: 'Hello World'),
-      );
+      WidgetEventSetText(data: 'Hello World').send();
     });
   }
 
