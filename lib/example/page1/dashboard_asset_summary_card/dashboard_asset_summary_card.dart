@@ -1,5 +1,7 @@
-// Write a flutter widget for asset summary card?
+import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_bus.dart';
 import 'package:event_driven_design/example/page1/dashboard_asset_summary_card/bloc/dashboard_asset_summary_cubit.dart';
+import 'package:event_driven_design/example/page1/dashboard_asset_summary_card/widget_events/widget_events.dart';
+import 'package:event_driven_design/example/page1/dashboard_asset_summary_card/widget_events/widget_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,18 +9,22 @@ class AssetSummaryCard extends StatelessWidget {
   final String assetName;
   final double assetValue;
   final String assetType;
+  final WidgetId widgetId;
 
   const AssetSummaryCard({
     Key? key,
     required this.assetName,
     required this.assetValue,
     required this.assetType,
+    required this.widgetId,
   }) : super(key: key);
+
+  DashboardAssetSummaryCubit _getCubit(BuildContext context) => context.read<DashboardAssetSummaryCubit>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DashboardAssetSummaryCubit(),
+      create: (context) => DashboardAssetSummaryCubit(widgetId: widgetId),
       child: BlocBuilder<DashboardAssetSummaryCubit, DashboardAssetSummaryState>(
         builder: (context, state) {
           return Card(
@@ -42,6 +48,18 @@ class AssetSummaryCard extends StatelessWidget {
                   Text(
                     'Type: $assetType',
                     style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _getCubit(context).sendEvent<WidgetEventBus>(
+                        WidgetEventSetText(
+                          data: 'Hello from $assetName',
+                          senderId: widgetId.index,
+                          receiverId: WidgetId.dashboardAssetBitcoinCard.index,
+                        ),
+                      );
+                    },
+                    child: const Text('Send Event'),
                   ),
                 ],
               ),

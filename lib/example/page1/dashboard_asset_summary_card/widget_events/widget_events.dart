@@ -5,5 +5,5 @@ class WidgetEventSetEnableStatus<bool> extends WidgetDataEvent {
 }
 
 class WidgetEventSetText<String> extends WidgetDataEvent {
-  WidgetEventSetText({required super.data});
+  WidgetEventSetText({required super.data, super.senderId, super.receiverId});
 }

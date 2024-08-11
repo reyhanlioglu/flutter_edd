@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:event_driven_design/core/event_bus/base_event_bus/base_event.dart';
-import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_id.dart';
 import 'package:rxdart/rxdart.dart';
 
 abstract class BaseEventBus<E extends BaseEvent> {
@@ -13,8 +12,8 @@ abstract class BaseEventBus<E extends BaseEvent> {
 
   StreamSubscription listenEvent({
     required Function() onEventReceived,
-    WidgetId? senderId,
-    WidgetId? receiverId,
+    int? senderId,
+    int? receiverId,
   }) {
     return _bus.listen((data) {
       if (data.runtimeType == E &&
@@ -27,13 +26,13 @@ abstract class BaseEventBus<E extends BaseEvent> {
 
   StreamSubscription listenDataEvent<DE extends BaseDataEvent, D>({
     required Function(D eventData) onEventReceived,
-    WidgetId? senderId,
-    WidgetId? receiverId,
+    int? senderId,
+    int? receiverId,
   }) {
     return _bus.listen((data) {
       if (data.runtimeType == DE &&
-          (senderId == null || senderId == data.senderId) &&
-          (receiverId == null || receiverId == data.receiverId)) {
+          (senderId == null || (data.senderId != null && data.senderId == senderId)) &&
+          (receiverId == null || (data.receiverId != null && data.receiverId == receiverId))) {
         onEventReceived((data as DE).data as D);
       }
     });
