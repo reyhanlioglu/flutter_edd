@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:event_driven_design/core/event_bus/base_event_bus/base_event.dart';
 import 'package:event_driven_design/core/event_bus/base_event_bus/base_event_bus.dart';
 import 'package:event_driven_design/core/event_bus/widget_event_bus/widget_event_bus.dart';
 import 'package:event_driven_design/core/mixins/bloc_mixins.dart';
@@ -11,7 +10,7 @@ part 'dashboard_asset_summary_state.dart';
 
 class DashboardAssetSummaryCubit extends Cubit<DashboardAssetSummaryState> with EventBusListener {
   @override
-  List<BaseEventBus<BaseEvent>> get eventBuses => [WidgetEventBus.instance];
+  List<BaseEventBus> get eventBuses => [WidgetEventBus.instance];
 
   final WidgetId widgetId;
 
