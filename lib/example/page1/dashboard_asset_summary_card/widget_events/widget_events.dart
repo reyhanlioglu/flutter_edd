@@ -13,7 +13,7 @@ class WidgetEventButtonSetText extends WidgetEvent {
   WidgetEventButtonSetText(this.isEnabled);
 }
 
-class WidgetEventTextSetText<WidgetEventTextSetTextData> extends WidgetDataEvent {
+class WidgetEventTextSetText<String> extends WidgetDataEvent {
   WidgetEventTextSetText({required super.data});
 }
 

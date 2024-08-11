@@ -21,7 +21,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void test() {
     Future.delayed(const Duration(seconds: 3), () {
       WidgetEventBus.instance.sendEvent(
-        widgetEvent: WidgetEventTextSetText(data: WidgetEventTextSetTextData('Hello World')),
+        widgetEvent: WidgetEventTextSetText<String>(data: 'Hello World'),
       );
     });
   }
