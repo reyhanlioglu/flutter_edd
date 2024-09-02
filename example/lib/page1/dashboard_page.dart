@@ -1,10 +1,10 @@
+import 'package:example/widget_events/widget_ids.dart';
 import 'package:flutter/material.dart';
 
 import 'dashboard_asset_summary_card/dashboard_asset_summary_card.dart';
-import 'dashboard_asset_summary_card/widget_events/widget_ids.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

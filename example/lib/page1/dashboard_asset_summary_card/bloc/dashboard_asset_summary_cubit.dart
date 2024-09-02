@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:example/widget_events/widget_events.dart';
+import 'package:example/widget_events/widget_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
-
-import '../widget_events/widget_events.dart';
-import '../widget_events/widget_ids.dart';
 
 part 'dashboard_asset_summary_state.dart';
 

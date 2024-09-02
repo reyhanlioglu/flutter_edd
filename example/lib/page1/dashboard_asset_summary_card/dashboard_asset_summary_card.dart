@@ -1,9 +1,9 @@
+import 'package:example/widget_events/widget_events.dart';
+import 'package:example/widget_events/widget_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 import 'bloc/dashboard_asset_summary_cubit.dart';
-import 'widget_events/widget_events.dart';
-import 'widget_events/widget_ids.dart';
 
 class AssetSummaryCard extends StatelessWidget {
   final String assetName;
@@ -12,12 +12,12 @@ class AssetSummaryCard extends StatelessWidget {
   final WidgetId widgetId;
 
   const AssetSummaryCard({
-    Key? key,
+    super.key,
     required this.assetName,
     required this.assetValue,
     required this.assetType,
     required this.widgetId,
-  }) : super(key: key);
+  });
 
   DashboardAssetSummaryCubit _getCubit(BuildContext context) => context.read<DashboardAssetSummaryCubit>();
 
