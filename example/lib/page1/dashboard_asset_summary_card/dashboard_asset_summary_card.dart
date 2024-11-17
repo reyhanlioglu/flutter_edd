@@ -5,7 +5,7 @@ import 'package:flutter_edd/flutter_edd.dart';
 
 import 'bloc/dashboard_asset_summary_cubit.dart';
 
-class AssetSummaryCard extends StatelessWidget {
+class AssetSummaryCard extends StatefulWidget {
   final String assetName;
   final double assetValue;
   final String assetType;
@@ -19,12 +19,30 @@ class AssetSummaryCard extends StatelessWidget {
     required this.widgetId,
   });
 
+  @override
+  State<AssetSummaryCard> createState() => _AssetSummaryCardState();
+}
+
+class _AssetSummaryCardState extends State<AssetSummaryCard> {
   DashboardAssetSummaryCubit _getCubit(BuildContext context) => context.read<DashboardAssetSummaryCubit>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void test(BuildContext context) async {
+    print('TEST: Sending event');
+    _getCubit(context).sendEvent<WidgetEventBus>(WidgetEventNavigateToAccountDetails());
+    await Future.delayed(const Duration(seconds: 3));
+    _getCubit(context).sendEvent<WidgetEventBus>(WidgetEventCompleteLogin());
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DashboardAssetSummaryCubit(widgetId: widgetId),
+      create: (context) => DashboardAssetSummaryCubit(widgetId: widget.widgetId),
       child: BlocBuilder<DashboardAssetSummaryCubit, DashboardAssetSummaryState>(
         builder: (context, state) {
           return Card(
@@ -36,28 +54,22 @@ class AssetSummaryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    assetName,
-                    style: Theme.of(context).textTheme.headline6,
+                    widget.assetName,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    'Value: \$${assetValue.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.subtitle1,
+                    'Value: \$${widget.assetValue.toStringAsFixed(2)}',
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8.0),
                   Text(
-                    'Type: $assetType',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    'Type: ${widget.assetType}',
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _getCubit(context).sendEvent<WidgetEventBus>(
-                        WidgetEventSetText(
-                          data: 'Hello from $assetName',
-                          senderId: widgetId.index,
-                          receiverId: WidgetId.dashboardAssetBitcoinCard.index,
-                        ),
-                      );
+                      test(context);
                     },
                     child: const Text('Send Event'),
                   ),

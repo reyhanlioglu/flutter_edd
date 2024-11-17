@@ -19,5 +19,11 @@ class DashboardAssetSummaryCubit extends Cubit<DashboardAssetSummaryState> with 
         print('${WidgetId.values.firstWhere((id) => id == widgetId)} received message: $data');
       },
     );
+
+    listenEvent<WidgetEventBus, WidgetEventNavigateToAccountDetails>(
+      onEventReceived: () {
+        print('TEST: Navigate to account details');
+      },
+    );
   }
 }

@@ -10,7 +10,7 @@ mixin EventBusListener<T> on BlocBase<T> {
   abstract final List<BaseEventBus> eventBuses;
 
   void sendEvent<B extends BaseEventBus>(BaseEvent event) {
-    eventBuses.firstWhere((bus) => bus is B).sendEvent(event: event);
+    eventBuses.firstWhere((bus) => bus is B).sendEvent(event);
   }
 
   void listenEvent<B extends BaseEventBus, E extends BaseEvent>({
@@ -18,7 +18,7 @@ mixin EventBusListener<T> on BlocBase<T> {
     int? senderId,
     int? receiverId,
   }) {
-    final subscription = eventBuses.firstWhere((bus) => bus is B).listenEvent(
+    final subscription = eventBuses.firstWhere((bus) => bus is B).listenEvent<E>(
           onEventReceived: onEventReceived,
           senderId: senderId,
           receiverId: receiverId,

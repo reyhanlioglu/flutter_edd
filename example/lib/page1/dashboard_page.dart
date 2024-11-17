@@ -21,18 +21,6 @@ class DashboardScreen extends StatelessWidget {
             assetType: 'Cryptocurrency',
             widgetId: WidgetId.dashboardAssetBitcoinCard,
           ),
-          AssetSummaryCard(
-            assetName: 'Ethereum',
-            assetValue: 3000.00,
-            assetType: 'Cryptocurrency',
-            widgetId: WidgetId.dashboardAssetEthereumCard,
-          ),
-          AssetSummaryCard(
-            assetName: 'Apple Stock',
-            assetValue: 150.00,
-            assetType: 'Stock',
-            widgetId: WidgetId.dashboardAssetAppleStockCard,
-          ),
         ],
       ),
     );

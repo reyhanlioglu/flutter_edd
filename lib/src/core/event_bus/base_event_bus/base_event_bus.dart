@@ -1,14 +1,28 @@
 import 'dart:async';
+import 'dart:collection';
 
+import 'package:flutter_edd/src/core/event_bus/event_bus.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'base_event.dart';
 
 abstract class BaseEventBus {
   final BehaviorSubject<BaseEvent> _bus = BehaviorSubject();
 
-  void sendEvent({required BaseEvent event}) {
-    _bus.add(event);
+  final Queue<BaseEvent> _asyncEventQueue = ListQueue();
+
+  void sendEvent(BaseEvent event) {
+    if (event.preconditionedEventId != null) {
+      _asyncEventQueue.add(event);
+    } else {
+      _bus.add(event);
+    }
+
+    final awaitingEvents = _asyncEventQueue.where((element) => element.preconditionedEventId == event.id).toList();
+    if (awaitingEvents.isNotEmpty) {
+      for (final awaitingEvent in awaitingEvents) {
+        _bus.add(awaitingEvent);
+        _asyncEventQueue.remove(awaitingEvent);
+      }
+    }
   }
 
   StreamSubscription listenEvent<BE extends BaseEvent>({
