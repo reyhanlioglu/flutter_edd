@@ -1,20 +1,26 @@
+import 'package:example/widget_events/event_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
-class WidgetEventSetEnableStatus<bool> extends WidgetDataEvent {
-  WidgetEventSetEnableStatus({required super.data});
+class WidgetEventDisplayPage extends WidgetEvent<dynamic, EventId> {
+  WidgetEventDisplayPage({super.id});
 }
 
-class WidgetEventSetText<String> extends WidgetDataEvent {
-  WidgetEventSetText({required super.data, super.senderId, super.receiverId});
+class WidgetEventAutofillSearchHotelCard
+    extends WidgetDataEvent<WidgetEventDataAutofillSearchHotelCard, dynamic, EventId> {
+  WidgetEventAutofillSearchHotelCard({
+    required super.data,
+    super.preconditionedEventId = EventId.displayPageDashboard,
+  });
 }
 
-class WidgetEventCompleteLogin<WidgetId> extends WidgetEvent<WidgetId> {
-  WidgetEventCompleteLogin() : super(id: "complete_login" as WidgetId?);
+class WidgetEventDataAutofillSearchHotelCard {
+  final String? city;
+  final String? startEndDate;
+  final int? numberOfPeople;
 
-  @override
-  WidgetId? get id => "complete_login" as WidgetId?;
-}
-
-class WidgetEventNavigateToAccountDetails<WidgetId> extends WidgetEvent<WidgetId> {
-  WidgetEventNavigateToAccountDetails() : super(preconditionedEventId: "complete_login" as WidgetId?);
+  WidgetEventDataAutofillSearchHotelCard({
+    this.city,
+    this.startEndDate,
+    this.numberOfPeople,
+  });
 }

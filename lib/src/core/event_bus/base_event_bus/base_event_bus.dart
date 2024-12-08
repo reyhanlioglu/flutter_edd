@@ -16,7 +16,9 @@ abstract class BaseEventBus {
       _bus.add(event);
     }
 
-    final awaitingEvents = _asyncEventQueue.where((element) => element.preconditionedEventId == event.id).toList();
+    final awaitingEvents = _asyncEventQueue
+        .where((element) => element.preconditionedEventId != null && element.preconditionedEventId == event.id)
+        .toList();
     if (awaitingEvents.isNotEmpty) {
       for (final awaitingEvent in awaitingEvents) {
         _bus.add(awaitingEvent);
@@ -27,8 +29,8 @@ abstract class BaseEventBus {
 
   StreamSubscription listenEvent<BE extends BaseEvent>({
     required Function() onEventReceived,
-    int? senderId,
-    int? receiverId,
+    dynamic senderId,
+    dynamic receiverId,
   }) {
     return _bus.listen((data) {
       if (data.runtimeType == BE && _canListen(data, senderId, receiverId)) {
@@ -39,8 +41,8 @@ abstract class BaseEventBus {
 
   StreamSubscription listenDataEvent<BDE extends BaseDataEvent, D>({
     required Function(D eventData) onEventReceived,
-    int? senderId,
-    int? receiverId,
+    dynamic senderId,
+    dynamic receiverId,
   }) {
     return _bus.listen((data) {
       if (data.runtimeType == BDE && _canListen(data, senderId, receiverId)) {
@@ -49,7 +51,7 @@ abstract class BaseEventBus {
     });
   }
 
-  bool _canListen(data, int? senderId, int? receiverId) {
+  bool _canListen(data, dynamic senderId, dynamic receiverId) {
     return (senderId == null || (data.senderId != null && data.senderId == senderId)) &&
         ((receiverId == null && data.receiverId == null) || (data.receiverId != null && data.receiverId == receiverId));
   }

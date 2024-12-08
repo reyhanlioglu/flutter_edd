@@ -1,15 +1,15 @@
-abstract class BaseEvent<Id> {
-  final Id? id;
-  final Id? senderId;
-  final Id? receiverId;
-  final Id? preconditionedEventId;
+abstract class BaseEvent<OwnerId, EventId> {
+  final EventId? id;
+  final OwnerId? senderId;
+  final OwnerId? receiverId;
+  final EventId? preconditionedEventId;
 
   BaseEvent({this.id, this.senderId, this.receiverId, this.preconditionedEventId});
 }
 
 extension BaseEventExtension on BaseEvent {}
 
-abstract class BaseDataEvent<Data, Id> extends BaseEvent<Id> {
+abstract class BaseDataEvent<Data, OwnerId, EventId> extends BaseEvent<OwnerId, EventId> {
   final Data data;
 
   BaseDataEvent({required this.data, super.id, super.senderId, super.receiverId, super.preconditionedEventId});

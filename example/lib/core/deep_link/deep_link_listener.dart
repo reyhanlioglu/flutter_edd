@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
+import 'package:example/core/deep_link/deep_link_interpreter.dart';
 import 'package:flutter/material.dart';
-import 'package:jwt_decode/jwt_decode.dart';
 
 /// Deeplink adb test command format
 /// adb shell am start -a android.intent.action.VIEW \ -d "edd://?jwt=your_jwt_token"
@@ -23,25 +23,35 @@ class _DeepLinkListenerState extends State<DeepLinkListener> {
 
   StreamSubscription<Uri>? uriSubscription;
 
-  @override
-  void initState() {
-    super.initState();
+  Future<bool> init() async {
+    uriSubscription = appLinks.uriLinkStream.listen(processUriLink);
+    processUriLink(await appLinks.getInitialLink());
+    return true;
+  }
 
-    uriSubscription = appLinks.uriLinkStream.listen((uri) {
-      final jwt = uri.queryParameters["jwt"];
-      if (jwt == null) {
-        return;
-      }
+  void processUriLink(Uri? uri) {
+    if (uri == null) {
+      return;
+    }
 
-      final parsedJwt = Jwt.parseJwt(jwt);
-
-      print('JWT: $parsedJwt');
-    });
+    final jwt = uri.queryParameters["jwt"];
+    if (jwt == null) {
+      return;
+    }
+    DeepLinkInterpreter().interpretFromJwt(jwt);
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return FutureBuilder<bool>(
+        future: init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Center(child: widget.child);
+        }
+    );
   }
 
   @override

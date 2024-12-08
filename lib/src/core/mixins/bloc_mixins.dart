@@ -15,8 +15,8 @@ mixin EventBusListener<T> on BlocBase<T> {
 
   void listenEvent<B extends BaseEventBus, E extends BaseEvent>({
     required Function() onEventReceived,
-    int? senderId,
-    int? receiverId,
+    dynamic senderId,
+    dynamic receiverId,
   }) {
     final subscription = eventBuses.firstWhere((bus) => bus is B).listenEvent<E>(
           onEventReceived: onEventReceived,
@@ -28,8 +28,8 @@ mixin EventBusListener<T> on BlocBase<T> {
 
   void listenDataEvent<B extends BaseEventBus, E extends BaseDataEvent, D>({
     required Function(D eventData) onEventReceived,
-    int? senderId,
-    int? receiverId,
+    dynamic senderId,
+    dynamic receiverId,
   }) {
     final subscription = eventBuses.firstWhere((bus) => bus is B).listenDataEvent<E, D>(
           onEventReceived: onEventReceived,
