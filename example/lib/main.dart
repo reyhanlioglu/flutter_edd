@@ -1,6 +1,7 @@
 import 'package:example/core/deep_link/deep_link_listener.dart';
 import 'package:example/core/navigation/navigation_listener_cubit.dart';
 import 'package:example/dashboard/dashboard_page.dart';
+import 'package:example/hotel_selection/hotel_selection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +9,7 @@ void main() {
   runApp(const MyApp());
 }
 
-final _navigatorKey = GlobalKey<NavigatorState>();
+final globalNavigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,20 +17,39 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NavigationListenerCubit(navigatorKey: _navigatorKey),
-      child: DeepLinkListener(
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          navigatorKey: _navigatorKey,
-          initialRoute: '/dashboard',
-          routes: {
-            '/dashboard': (context) => const DashboardPage(),
-          },
-        ),
+      create: (context) => NavigationListenerCubit(),
+      child: BlocBuilder<NavigationListenerCubit, NavigationListenerState>(
+        builder: (context, state) {
+          return DeepLinkListener(
+            child: MaterialApp(
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              navigatorKey: globalNavigatorKey,
+              initialRoute: '/dashboard',
+              onGenerateRoute: (settings) {
+                final routeUri = settings.name is String ? Uri.tryParse(settings.name as String) : null;
+
+                final arguments = routeUri?.queryParameters ?? {};
+
+                switch (routeUri?.path ?? "") {
+                  case '/dashboard':
+                    return MaterialPageRoute(builder: (context) => const DashboardPage());
+                  case '/hotel-selection':
+                    return MaterialPageRoute(
+                      builder: (context) => HotelSelectionPage(
+                        city: arguments['city'] as String,
+                        dateRange: arguments['dateRange'] as String,
+                        numberOfPeople: int.parse(arguments['numberOfPeople'] as String),
+                      ),
+                    );
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class HotelSelectionPage extends StatelessWidget {
   final String city;
   final String dateRange;
-  final int numberOfPerson;
+  final int numberOfPeople;
 
   const HotelSelectionPage({
     required this.city,
     required this.dateRange,
-    required this.numberOfPerson,
+    required this.numberOfPeople,
     super.key,
   });
 

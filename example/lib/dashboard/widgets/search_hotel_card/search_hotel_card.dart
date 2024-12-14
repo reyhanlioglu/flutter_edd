@@ -11,25 +11,21 @@ class SearchHotelCard extends StatefulWidget {
 }
 
 class _SearchHotelCardState extends State<SearchHotelCard> {
-  // TODO: Move controllers to cubit
-  final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _dateRangeController = TextEditingController();
-  final TextEditingController _numberOfPersonController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SearchHotelCardCubit(),
-      child: BlocConsumer<SearchHotelCardCubit, SearchHotelCardState>(
-        listener: (context, state) => _fillInputFields(state),
+      child: BlocBuilder<SearchHotelCardCubit, SearchHotelCardState>(
         builder: (context, state) {
+          final cubit = context.read<SearchHotelCardCubit>();
           return Card(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: _locationController,
+                    controller: cubit.cityController,
                     decoration: const InputDecoration(
                       labelText: 'City',
                       border: OutlineInputBorder(),
@@ -37,7 +33,7 @@ class _SearchHotelCardState extends State<SearchHotelCard> {
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
-                    controller: _dateRangeController,
+                    controller: cubit.dateRangeController,
                     decoration: const InputDecoration(
                       labelText: 'Start-End Date',
                       border: OutlineInputBorder(),
@@ -45,7 +41,7 @@ class _SearchHotelCardState extends State<SearchHotelCard> {
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
-                    controller: _numberOfPersonController,
+                    controller: cubit.numberOfPersonController,
                     decoration: const InputDecoration(
                       labelText: 'Number of People',
                       border: OutlineInputBorder(),
@@ -53,7 +49,7 @@ class _SearchHotelCardState extends State<SearchHotelCard> {
                   ),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: _searchHotels,
+                    onPressed: () => _searchHotels(context),
                     child: const Text('Search'),
                   ),
                 ],
@@ -65,40 +61,7 @@ class _SearchHotelCardState extends State<SearchHotelCard> {
     );
   }
 
-  void _fillInputFields(SearchHotelCardState state) {
-    if (state.city != null) {
-      _locationController.text = state.city!;
-    }
-    if (state.startEndDate != null) {
-      _dateRangeController.text = state.startEndDate!;
-    }
-    if (state.numberOfPeople != null) {
-      _numberOfPersonController.text = state.numberOfPeople!.toString();
-    }
-  }
-
-  void _searchHotels() {
-    final city = _locationController.text;
-    final dateRange = _dateRangeController.text;
-    final numberOfPerson = _numberOfPersonController.text;
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HotelSelectionPage(
-          city: city,
-          dateRange: dateRange,
-          numberOfPerson: int.parse(numberOfPerson),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _locationController.dispose();
-    _dateRangeController.dispose();
-    _numberOfPersonController.dispose();
-    super.dispose();
+  void _searchHotels(BuildContext context) {
+    context.read<SearchHotelCardCubit>().onSearchHotels();
   }
 }

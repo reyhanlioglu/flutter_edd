@@ -1,3 +1,4 @@
 enum EventId {
   displayPageDashboard,
+  searchHotelCardEventAutofillFields,
 }

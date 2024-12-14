@@ -1,4 +1,5 @@
-import 'package:example/widget_events/widget_events.dart';
+import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_event.dart';
+import 'package:example/widget_events/event_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 class ProcessHotelSuggestionDeepLinkEventUseCase {
@@ -8,14 +9,16 @@ class ProcessHotelSuggestionDeepLinkEventUseCase {
     final String? endDate = data['endDate'];
     final int? numberOfPeople = data['numberOfPeople'];
 
-    WidgetEventBus.instance.sendEvent(
-      WidgetEventAutofillSearchHotelCard(
-        data: WidgetEventDataAutofillSearchHotelCard(
-          city: city,
-          startEndDate: "$startDate - $endDate",
-          numberOfPeople: numberOfPeople,
+    WidgetEventBus.instance
+      ..sendEvent(SearchHotelCardEventSearchHotels(preconditionedEventId: EventId.searchHotelCardEventAutofillFields))
+      ..sendEvent(
+        SearchHotelCardEventAutofillFields(
+          data: SearchHotelCardEventDataAutofillFields(
+            city: city,
+            startEndDate: "$startDate - $endDate",
+            numberOfPeople: numberOfPeople,
+          ),
         ),
-      ),
-    );
+      );
   }
 }

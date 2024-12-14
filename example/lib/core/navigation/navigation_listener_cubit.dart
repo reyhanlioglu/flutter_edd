@@ -1,14 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:example/core/navigation/navigation_listener_event.dart';
+import 'package:example/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 part 'navigation_listener_state.dart';
 
 class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventBusListener {
-  final GlobalKey<NavigatorState> navigatorKey;
-
-  NavigationListenerCubit({required this.navigatorKey}) : super(const NavigationListenerState()) {
+  NavigationListenerCubit() : super(const NavigationListenerState()) {
     _listenWidgetEventBus();
   }
 
@@ -17,26 +16,27 @@ class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventB
   }
 
   void _handleNavigationEvent(NavigationEventData data) {
+    print('TEST: Processing navigation event');
     switch (data.navigationType) {
       case NavigationTypePush():
         final navigationType = data.navigationType as NavigationTypePush;
-        navigatorKey.currentState?.pushNamed(navigationType.path, arguments: navigationType.arguments);
+        globalNavigatorKey.currentState?.pushNamed(navigationType.path, arguments: navigationType.arguments);
 
       case NavigationTypePop():
         final navigationType = data.navigationType as NavigationTypePop;
-        navigatorKey.currentState?.pop(navigationType.result);
+        globalNavigatorKey.currentState?.pop(navigationType.result);
 
       case NavigationTypePopUntil():
         final navigationType = data.navigationType as NavigationTypePopUntil;
-        navigatorKey.currentState?.popUntil(ModalRoute.withName(navigationType.path));
+        globalNavigatorKey.currentState?.popUntil(ModalRoute.withName(navigationType.path));
 
       case NavigationTypePushReplacement():
         final navigationType = data.navigationType as NavigationTypePushReplacement;
-        navigatorKey.currentState?.pushReplacementNamed(navigationType.path);
+        globalNavigatorKey.currentState?.pushReplacementNamed(navigationType.path);
 
       case NavigationTypePushAndRemoveUntil():
         final navigationType = data.navigationType as NavigationTypePushAndRemoveUntil;
-        navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        globalNavigatorKey.currentState?.pushNamedAndRemoveUntil(
           navigationType.newRouteName,
           navigationType.predicate,
           arguments: navigationType.arguments,
