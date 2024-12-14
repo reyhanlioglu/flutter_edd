@@ -16,7 +16,6 @@ class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventB
   }
 
   void _handleNavigationEvent(NavigationEventData data) {
-    print('TEST: Processing navigation event');
     switch (data.navigationType) {
       case NavigationTypePush():
         final navigationType = data.navigationType as NavigationTypePush;

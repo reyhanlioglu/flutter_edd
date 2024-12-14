@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:example/common_events/event_ids.dart';
+import 'package:example/common_events/common_events.dart';
 import 'package:example/core/navigation/navigation_listener_event.dart';
 import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_event.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +15,11 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
 
   SearchHotelCardCubit() : super(const SearchHotelCardState()) {
     _listenWidgetEventBus();
+    WidgetEventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayWidgetSearchHotelCard));
   }
 
   onSearchHotels() {
     sendEvent(SearchHotelCardEventSearchHotels());
-  }
-
-  onCityChanged(String city) {
-    cityController.text = city;
   }
 
   _listenWidgetEventBus() {
@@ -35,7 +34,6 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
         if (data.numberOfPeople != null) {
           numberOfPersonController.text = data.numberOfPeople!.toString();
         }
-        print('TEST: Inputs are filled');
       },
     );
 
@@ -46,13 +44,10 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
         final numberOfPeople = numberOfPersonController.text;
 
         if (city.isEmpty || dateRange.isEmpty || numberOfPeople.isEmpty) {
-          print('TEST: Returned');
           return;
         }
 
-        print('TEST: Sending navigation event');
-
-        sendEvent(
+        sendEvent<WidgetEventBus>(
           NavigationEvent(
             data: NavigationEventData(
               navigationType: NavigationTypePush(

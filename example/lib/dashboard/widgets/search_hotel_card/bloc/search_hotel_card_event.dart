@@ -1,4 +1,4 @@
-import 'package:example/widget_events/event_ids.dart';
+import 'package:example/common_events/event_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 class SearchHotelCardEventAutofillFields
@@ -6,7 +6,7 @@ class SearchHotelCardEventAutofillFields
   SearchHotelCardEventAutofillFields({
     required super.data,
     super.id = EventId.searchHotelCardEventAutofillFields,
-    super.preconditionedEventId = EventId.displayPageDashboard,
+    super.preconditionedEventId = EventId.displayWidgetSearchHotelCard,
   });
 }
 

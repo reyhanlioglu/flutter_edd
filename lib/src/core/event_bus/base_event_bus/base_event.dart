@@ -3,8 +3,15 @@ abstract class BaseEvent<OwnerId, EventId> {
   final OwnerId? senderId;
   final OwnerId? receiverId;
   final EventId? preconditionedEventId;
+  bool _preconditionsMet = false;
 
   BaseEvent({this.id, this.senderId, this.receiverId, this.preconditionedEventId});
+
+  void setPreconditionsMet(bool value) {
+    _preconditionsMet = value;
+  }
+
+  bool get isPreconditionsMet => _preconditionsMet;
 }
 
 extension BaseEventExtension on BaseEvent {}

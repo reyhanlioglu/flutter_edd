@@ -1,4 +1,4 @@
 enum EventId {
-  displayPageDashboard,
+  displayWidgetSearchHotelCard,
   searchHotelCardEventAutofillFields,
 }
