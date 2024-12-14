@@ -1,6 +1,9 @@
+import 'package:example/common_events/common_events.dart';
+import 'package:example/common_events/event_ids.dart';
 import 'package:example/hotel_selection/widgets/hotel_selection_item_widget/hotel_selection_item_widget.dart';
 import 'package:example/hotel_selection/widgets/hotel_selection_item_widget/models/hotel_selection_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_edd/flutter_edd.dart';
 
 class HotelSelectionPage extends StatelessWidget {
   final String city;
@@ -16,6 +19,7 @@ class HotelSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Get hotels from BLoC
     final List<Map<String, dynamic>> hotels = [
       {
         'id': 200,
@@ -88,6 +92,10 @@ class HotelSelectionPage extends StatelessWidget {
         'rating': 4.7,
       },
     ];
+
+    Future.delayed(const Duration(milliseconds: 10), () {
+      WidgetEventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayPageHotelSelection));
+    });
 
     return Scaffold(
       appBar: AppBar(title: Text('$city Hotels')),
