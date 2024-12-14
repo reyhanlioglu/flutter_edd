@@ -25,7 +25,7 @@ class _DeepLinkListenerState extends State<DeepLinkListener> {
 
   Future<bool> init() async {
     uriSubscription = appLinks.uriLinkStream.listen(processUriLink);
-    processUriLink(await appLinks.getInitialLink());
+    await appLinks.getInitialLink();
     return true;
   }
 
