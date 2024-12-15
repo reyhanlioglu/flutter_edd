@@ -12,10 +12,10 @@ class HotelSelectionItemCubit extends Cubit<HotelSelectionItemState> with EventB
   }
 
   @override
-  List<BaseEventBus> get eventBuses => [WidgetEventBus.instance];
+  List<BaseEventBus> get eventBuses => [EventBus.instance];
 
   void _listenWidgetEventBus() {
-    listenDataEvent<WidgetEventBus, HotelSelectionItemEventHighlightForSuggestion,
+    listenDataEvent<EventBus, HotelSelectionItemEventHighlightForSuggestion,
         HotelSelectionItemEventDataHighlightForSuggestion>(
       onEventReceived: (data) {
         if (data.hotelId == hotel.id) {

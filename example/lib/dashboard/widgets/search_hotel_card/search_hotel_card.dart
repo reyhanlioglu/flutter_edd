@@ -41,7 +41,7 @@ class _SearchHotelCardState extends State<SearchHotelCard> {
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
-                    controller: cubit.numberOfPersonController,
+                    controller: cubit.numberOfPeopleController,
                     decoration: const InputDecoration(
                       labelText: 'Number of People',
                       border: OutlineInputBorder(),

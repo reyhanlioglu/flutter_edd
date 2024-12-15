@@ -11,11 +11,11 @@ part 'search_hotel_card_state.dart';
 class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusListener {
   final TextEditingController cityController = TextEditingController();
   final TextEditingController dateRangeController = TextEditingController();
-  final TextEditingController numberOfPersonController = TextEditingController();
+  final TextEditingController numberOfPeopleController = TextEditingController();
 
   SearchHotelCardCubit() : super(const SearchHotelCardState()) {
     _listenWidgetEventBus();
-    WidgetEventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayWidgetSearchHotelCard));
+    EventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayWidgetSearchHotelCard));
   }
 
   onSearchHotels() {
@@ -23,7 +23,7 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
   }
 
   _listenWidgetEventBus() {
-    listenDataEvent<WidgetEventBus, SearchHotelCardEventAutofillFields, SearchHotelCardEventDataAutofillFields>(
+    listenDataEvent<EventBus, SearchHotelCardEventAutofillFields, SearchHotelCardEventDataAutofillFields>(
       onEventReceived: (data) {
         if (data.city != null) {
           cityController.text = data.city!;
@@ -32,22 +32,22 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
           dateRangeController.text = data.startEndDate!;
         }
         if (data.numberOfPeople != null) {
-          numberOfPersonController.text = data.numberOfPeople!.toString();
+          numberOfPeopleController.text = data.numberOfPeople!.toString();
         }
       },
     );
 
-    listenEvent<WidgetEventBus, SearchHotelCardEventSearchHotels>(
+    listenEvent<EventBus, SearchHotelCardEventSearchHotels>(
       onEventReceived: () {
         final city = cityController.text;
         final dateRange = dateRangeController.text;
-        final numberOfPeople = numberOfPersonController.text;
+        final numberOfPeople = numberOfPeopleController.text;
 
         if (city.isEmpty || dateRange.isEmpty || numberOfPeople.isEmpty) {
           return;
         }
 
-        sendEvent<WidgetEventBus>(
+        sendEvent<EventBus>(
           NavigationEvent(
             data: NavigationEventData(
               navigationType: NavigationTypePush(
@@ -61,13 +61,13 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
   }
 
   @override
-  List<BaseEventBus> get eventBuses => [WidgetEventBus.instance];
+  List<BaseEventBus> get eventBuses => [EventBus.instance];
 
   @override
   Future<void> close() {
     cityController.dispose();
     dateRangeController.dispose();
-    numberOfPersonController.dispose();
+    numberOfPeopleController.dispose();
     return super.close();
   }
 }

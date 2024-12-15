@@ -2,7 +2,7 @@ import 'package:example/common_events/event_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 class HotelSelectionItemEventHighlightForSuggestion
-    extends WidgetDataEvent<HotelSelectionItemEventDataHighlightForSuggestion, dynamic, EventId> {
+    extends BaseDataEvent<HotelSelectionItemEventDataHighlightForSuggestion, dynamic, EventId> {
   HotelSelectionItemEventHighlightForSuggestion({required super.data, super.preconditionedEventId});
 }
 

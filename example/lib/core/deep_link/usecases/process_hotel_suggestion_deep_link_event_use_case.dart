@@ -11,7 +11,7 @@ class ProcessHotelSuggestionDeepLinkEventUseCase {
     final int? numberOfPeople = data['numberOfPeople'];
     final int hotelId = int.parse(data['suggestedHotelId'] ?? "");
 
-    WidgetEventBus.instance
+    EventBus.instance
       ..sendEvent(SearchHotelCardEventSearchHotels(preconditionedEventId: EventId.searchHotelCardEventAutofillFields))
       ..sendEvent(
         SearchHotelCardEventAutofillFields(

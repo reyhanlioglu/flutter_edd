@@ -2,7 +2,7 @@ import 'package:example/common_events/event_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
-class NavigationEvent extends WidgetDataEvent<NavigationEventData, dynamic, EventId> {
+class NavigationEvent extends BaseDataEvent<NavigationEventData, dynamic, EventId> {
   NavigationEvent({
     required super.data,
     super.preconditionedEventId,

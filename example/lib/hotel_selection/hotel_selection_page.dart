@@ -94,7 +94,7 @@ class HotelSelectionPage extends StatelessWidget {
     ];
 
     Future.delayed(const Duration(milliseconds: 10), () {
-      WidgetEventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayPageHotelSelection));
+      EventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayPageHotelSelection));
     });
 
     return Scaffold(

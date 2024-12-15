@@ -2,7 +2,7 @@ import 'package:example/common_events/event_ids.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
 class SearchHotelCardEventAutofillFields
-    extends WidgetDataEvent<SearchHotelCardEventDataAutofillFields, dynamic, EventId> {
+    extends BaseDataEvent<SearchHotelCardEventDataAutofillFields, dynamic, EventId> {
   SearchHotelCardEventAutofillFields({
     required super.data,
     super.id = EventId.searchHotelCardEventAutofillFields,
@@ -22,6 +22,6 @@ class SearchHotelCardEventDataAutofillFields {
   });
 }
 
-class SearchHotelCardEventSearchHotels extends WidgetEvent<dynamic, EventId> {
+class SearchHotelCardEventSearchHotels extends BaseEvent<dynamic, EventId> {
   SearchHotelCardEventSearchHotels({super.preconditionedEventId});
 }

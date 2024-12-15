@@ -12,7 +12,7 @@ class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventB
   }
 
   _listenWidgetEventBus() {
-    listenDataEvent<WidgetEventBus, NavigationEvent, NavigationEventData>(onEventReceived: _handleNavigationEvent);
+    listenDataEvent<EventBus, NavigationEvent, NavigationEventData>(onEventReceived: _handleNavigationEvent);
   }
 
   void _handleNavigationEvent(NavigationEventData data) {
@@ -44,5 +44,5 @@ class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventB
   }
 
   @override
-  List<BaseEventBus> get eventBuses => [WidgetEventBus.instance];
+  List<BaseEventBus> get eventBuses => [EventBus.instance];
 }
