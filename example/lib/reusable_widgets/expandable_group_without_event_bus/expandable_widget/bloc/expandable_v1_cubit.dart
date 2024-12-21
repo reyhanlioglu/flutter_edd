@@ -11,20 +11,20 @@ class ExpandableV1Cubit extends Cubit<ExpandableV1State> {
 
 
   void toggleExpansion() {
-    final newState = !state.isExpanded;
-    if (newState) {
-      expansionTileController?.expand();
+    if (state.isExpanded) {
+      collapse();
     } else {
-      expansionTileController?.collapse();
+      expand();
     }
-    emit(ExpandableV1State(isExpanded: newState));
   }
 
   void expand() {
+    expansionTileController?.expand();
     emit(const ExpandableV1State(isExpanded: true));
   }
 
   void collapse() {
+    expansionTileController?.collapse();
     emit(const ExpandableV1State(isExpanded: false));
 
   }

@@ -14,14 +14,7 @@ class ExpandableV1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ExpandableV1Cubit(expansionTileController: controller),
-      child: BlocConsumer<ExpandableV1Cubit, ExpandableV1State>(
-        listener: (context, state) {
-          if (state.isExpanded) {
-            controller?.expand();
-          } else {
-            controller?.collapse();
-          }
-        },
+      child: BlocBuilder<ExpandableV1Cubit, ExpandableV1State>(
         builder: (context, state) {
           return Card(
             child: Column(
@@ -31,9 +24,7 @@ class ExpandableV1 extends StatelessWidget {
                   title: Text(uiModel.title),
                   trailing: Icon(state.isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down),
                   initiallyExpanded: uiModel.isExpanded,
-                  onExpansionChanged: (bool isExpanded) {
-                    onExpansionChanged?.call(isExpanded);
-                  },
+                  onExpansionChanged: (bool isExpanded) => onExpansionChanged?.call(isExpanded),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
                   children: [
                     ListTile(title: Text(uiModel.content)),
