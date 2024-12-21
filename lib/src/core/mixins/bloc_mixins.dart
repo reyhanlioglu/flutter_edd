@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 
 import '../event_bus/base_event_bus/base_event.dart';
 import '../event_bus/base_event_bus/base_event_bus.dart';
