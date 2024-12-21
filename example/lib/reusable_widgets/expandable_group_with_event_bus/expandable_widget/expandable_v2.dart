@@ -5,14 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExpandableV2 extends StatelessWidget {
   final ExpandableUIModel uiModel;
+  final String? groupId;
 
-  const ExpandableV2({super.key, required this.uiModel});
+  const ExpandableV2({super.key, required this.uiModel, this.groupId});
 
   @override
   Widget build(BuildContext context) {
     final expansionTileController = ExpansionTileController();
     return BlocProvider(
-      create: (context) => ExpandableV2Cubit(expansionTileController: expansionTileController),
+      create: (context) => ExpandableV2Cubit(expansionTileController: expansionTileController, groupId: groupId),
       child: BlocBuilder<ExpandableV2Cubit, ExpandableV2State>(
         builder: (context, state) {
           return Card(
