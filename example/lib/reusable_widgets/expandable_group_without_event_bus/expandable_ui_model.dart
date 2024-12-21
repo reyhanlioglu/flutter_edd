@@ -3,5 +3,5 @@ class ExpandableUIModel {
   final String content;
   final bool isExpanded;
 
-  ExpandableUIModel({required this.title, required this.content, this.isExpanded = false});
+  const ExpandableUIModel({required this.title, required this.content, this.isExpanded = false});
 }

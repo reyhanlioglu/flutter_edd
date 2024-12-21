@@ -38,7 +38,7 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
     );
 
     listenEvent<EventBus, SearchHotelCardEventSearchHotels>(
-      onEventReceived: () {
+      onEventReceived: (_) {
         final city = cityController.text;
         final dateRange = dateRangeController.text;
         final numberOfPeople = numberOfPeopleController.text;

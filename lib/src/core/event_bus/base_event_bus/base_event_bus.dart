@@ -20,13 +20,13 @@ abstract class BaseEventBus {
   }
 
   StreamSubscription listenEvent<BE extends BaseEvent>({
-    required Function() onEventReceived,
+    required Function(BE event) onEventReceived,
     dynamic senderId,
     dynamic receiverId,
   }) {
     return _bus.listen((data) {
       if (data.runtimeType == BE && _canListen(data, senderId, receiverId)) {
-        onEventReceived();
+        onEventReceived(data as BE);
       }
     });
   }

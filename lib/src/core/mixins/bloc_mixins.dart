@@ -14,7 +14,7 @@ mixin EventBusListener<T> on BlocBase<T> {
   }
 
   void listenEvent<B extends BaseEventBus, E extends BaseEvent>({
-    required Function() onEventReceived,
+    required Function(E event) onEventReceived,
     dynamic senderId,
     dynamic receiverId,
   }) {
