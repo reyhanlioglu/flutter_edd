@@ -10,4 +10,6 @@ Event Driven Design package for Flutter.
 
 - Listen to multiple event buses.
 - Handle events and data events with ease.
-- Integrate seamlessly with `flutter_bloc`.
+- Integrate seamlessly with `bloc` using `EventBusListener` mixin without worrying about memory leaks.
+- Send and receive events with specific sender and receiver IDs.
+- Send and receive events with type safety.
