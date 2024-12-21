@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// adb shell am start -a android.intent.action.VIEW \ -d "edd://?jwt=your_jwt_token"
 ///
 /// Example deeplink adb test command
-/// adb shell am start -a android.intent.action.VIEW \ -d "edd://?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkVtcmUgUmV5aGFubGlvZ2x1IiwiY2l0eSI6IkxvbmRvbiIsIm51bWJlck9mUGVvcGxlIjozLCJzdGFydERhdGUiOiIxOC4wMS4yMDI1IiwiZW5kRGF0ZSI6IjI1LjAxLjIwMjUiLCJlbWFpbCI6InJleWhhbmxpb2dsdWVtcmVAZ21haWwuY29tIiwic3VnZ2VzdGVkSG90ZWxJZCI6IjIyMSIsInBob25lTnVtYmVyIjoiKzkwIDUzMyA0NDQgNTUgNjYiLCJpYXQiOjE1MTYyMzkwMjJ9.BNA5c07Mp6D_x7v2Urx7lXY0xYKeJgcM5NIlOaDzcXs"
+/// adb shell am start -a android.intent.action.VIEW \ -d "edd://?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJldmVudFR5cGUiOiJob3RlbFN1Z2dlc3Rpb24iLCJmdWxsTmFtZSI6IkVtcmUgUmV5aGFubGlvZ2x1IiwiY2l0eSI6IkxvbmRvbiIsIm51bWJlck9mUGVvcGxlIjozLCJzdGFydERhdGUiOiIxOC4wMS4yMDI1IiwiZW5kRGF0ZSI6IjI1LjAxLjIwMjUiLCJlbWFpbCI6InJleWhhbmxpb2dsdWVtcmVAZ21haWwuY29tIiwic3VnZ2VzdGVkSG90ZWxJZCI6IjIyMSIsInBob25lTnVtYmVyIjoiKzkwIDUzMyA0NDQgNTUgNjYiLCJpYXQiOjE1MTYyMzkwMjJ9.Urm5KRXoEVZvP6-cYVraVKhdAO_cXBODYSN68Dd4o9A"
 class DeepLinkListener extends StatefulWidget {
   const DeepLinkListener({required this.child, super.key});
 
