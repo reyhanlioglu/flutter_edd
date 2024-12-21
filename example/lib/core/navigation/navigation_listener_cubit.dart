@@ -8,33 +8,29 @@ part 'navigation_listener_state.dart';
 
 class NavigationListenerCubit extends Cubit<NavigationListenerState> with EventBusListener {
   NavigationListenerCubit() : super(const NavigationListenerState()) {
-    _listenWidgetEventBus();
+    _listenEventBus();
   }
 
-  _listenWidgetEventBus() {
-    listenDataEvent<EventBus, NavigationEvent, NavigationEventData>(onEventReceived: _handleNavigationEvent);
+  _listenEventBus() {
+    listenEvent<EventBus, NavigationEvent>(onEventReceived: _handleNavigationEvent);
   }
 
-  void _handleNavigationEvent(NavigationEventData data) {
-    switch (data.navigationType) {
+  void _handleNavigationEvent(NavigationEvent event) {
+    final navigationType = event.data.navigationType;
+    switch (navigationType) {
       case NavigationTypePush():
-        final navigationType = data.navigationType as NavigationTypePush;
         globalNavigatorKey.currentState?.pushNamed(navigationType.path, arguments: navigationType.arguments);
 
       case NavigationTypePop():
-        final navigationType = data.navigationType as NavigationTypePop;
         globalNavigatorKey.currentState?.pop(navigationType.result);
 
       case NavigationTypePopUntil():
-        final navigationType = data.navigationType as NavigationTypePopUntil;
         globalNavigatorKey.currentState?.popUntil(ModalRoute.withName(navigationType.path));
 
       case NavigationTypePushReplacement():
-        final navigationType = data.navigationType as NavigationTypePushReplacement;
         globalNavigatorKey.currentState?.pushReplacementNamed(navigationType.path);
 
       case NavigationTypePushAndRemoveUntil():
-        final navigationType = data.navigationType as NavigationTypePushAndRemoveUntil;
         globalNavigatorKey.currentState?.pushNamedAndRemoveUntil(
           navigationType.newRouteName,
           navigationType.predicate,

@@ -26,19 +26,6 @@ mixin EventBusListener<T> on BlocBase<T> {
     streamSubscriptionList.add(subscription);
   }
 
-  void listenDataEvent<B extends BaseEventBus, E extends BaseDataEvent, D>({
-    required Function(D eventData) onEventReceived,
-    dynamic senderId,
-    dynamic receiverId,
-  }) {
-    final subscription = eventBuses.firstWhere((bus) => bus is B).listenDataEvent<E, D>(
-          onEventReceived: onEventReceived,
-          senderId: senderId,
-          receiverId: receiverId,
-        );
-    streamSubscriptionList.add(subscription);
-  }
-
   @override
   Future<void> close() {
     for (final subscription in streamSubscriptionList) {

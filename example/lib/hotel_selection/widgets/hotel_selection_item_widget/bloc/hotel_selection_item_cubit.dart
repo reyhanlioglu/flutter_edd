@@ -8,17 +8,16 @@ class HotelSelectionItemCubit extends Cubit<HotelSelectionItemState> with EventB
   final HotelSelectionItemModel hotel;
 
   HotelSelectionItemCubit({required this.hotel}) : super(HotelSelectionItemState(isHighlighted: false)) {
-    _listenWidgetEventBus();
+    _listenEventBus();
   }
 
   @override
   List<BaseEventBus> get eventBuses => [EventBus.instance];
 
-  void _listenWidgetEventBus() {
-    listenDataEvent<EventBus, HotelSelectionItemEventHighlightForSuggestion,
-        HotelSelectionItemEventDataHighlightForSuggestion>(
-      onEventReceived: (data) {
-        if (data.hotelId == hotel.id) {
+  void _listenEventBus() {
+    listenEvent<EventBus, HotelSelectionItemEventHighlightForSuggestion>(
+      onEventReceived: (event) {
+        if (event.data.hotelId == hotel.id) {
           emit(state.copyWith(isHighlighted: true));
         }
       },

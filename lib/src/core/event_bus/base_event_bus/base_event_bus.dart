@@ -31,18 +31,6 @@ abstract class BaseEventBus {
     });
   }
 
-  StreamSubscription listenDataEvent<BDE extends BaseDataEvent, D>({
-    required Function(D eventData) onEventReceived,
-    dynamic senderId,
-    dynamic receiverId,
-  }) {
-    return _bus.listen((data) {
-      if (data.runtimeType == BDE && _canListen(data, senderId, receiverId)) {
-        onEventReceived((data as BDE).data as D);
-      }
-    });
-  }
-
   bool _canListen(data, dynamic senderId, dynamic receiverId) {
     return (senderId == null || (data.senderId != null && data.senderId == senderId)) &&
         ((receiverId == null && data.receiverId == null) || (data.receiverId != null && data.receiverId == receiverId));

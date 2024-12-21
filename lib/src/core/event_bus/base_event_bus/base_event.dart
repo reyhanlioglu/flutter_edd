@@ -14,8 +14,6 @@ abstract class BaseEvent<OwnerId, EventId> {
   bool get isPreconditionsMet => _preconditionsMet;
 }
 
-extension BaseEventExtension on BaseEvent {}
-
 abstract class BaseDataEvent<Data, OwnerId, EventId> extends BaseEvent<OwnerId, EventId> {
   final Data data;
 

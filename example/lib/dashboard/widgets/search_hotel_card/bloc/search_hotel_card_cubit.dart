@@ -14,7 +14,7 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
   final TextEditingController numberOfPeopleController = TextEditingController();
 
   SearchHotelCardCubit() : super(const SearchHotelCardState()) {
-    _listenWidgetEventBus();
+    _listenEventBus();
     EventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayWidgetSearchHotelCard));
   }
 
@@ -22,9 +22,10 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
     sendEvent(SearchHotelCardEventSearchHotels());
   }
 
-  _listenWidgetEventBus() {
-    listenDataEvent<EventBus, SearchHotelCardEventAutofillFields, SearchHotelCardEventDataAutofillFields>(
-      onEventReceived: (data) {
+  _listenEventBus() {
+    listenEvent<EventBus, SearchHotelCardEventAutofillFields>(
+      onEventReceived: (event) {
+        final data = event.data;
         if (data.city != null) {
           cityController.text = data.city!;
         }
