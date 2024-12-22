@@ -1,6 +1,12 @@
 name: flutter_edd
-description: "Event driven design package for Flutter"
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: "A package that facilitates event-driven design for Flutter apps"
+repository: https://github.com/reyhanlioglu/flutter_edd/tree/master
+topics:
+  - event
+  - event-driven
+  - event-driven-design
+  - reactive-programming
+  - bloc
 version: 1.0.0+1
 
 environment:
@@ -11,16 +17,11 @@ dependencies:
     sdk: flutter
 
   rxdart: ^0.28.0
+  bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc: ^8.1.4
 
 flutter:
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
