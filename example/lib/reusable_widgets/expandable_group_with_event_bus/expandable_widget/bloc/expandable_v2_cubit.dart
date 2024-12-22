@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:example/reusable_widgets/expandable_group_with_event_bus/bloc/expandable_group_event.dart';
 import 'package:example/reusable_widgets/expandable_group_with_event_bus/expandable_widget/bloc/expandable_v2_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_edd/flutter_edd.dart';
@@ -20,8 +21,8 @@ class ExpandableV2Cubit extends Cubit<ExpandableV2State> with EventBusListener {
     if (groupId == null) {
       return;
     }
-    listenEvent<EventBus, ExpandableWidgetEventCollapseOthers>(onEventReceived: (event) {
-      if (event.senderId != null && event.senderId != _itemId && event.senderId!.startsWith(groupId!)) {
+    listenEvent<EventBus, ExpandableGroupEventCollapseOthers>(onEventReceived: (event) {
+      if (event.data.expandedItemId != _itemId && event.data.groupId.startsWith(groupId!)) {
         _collapse();
       }
     });
@@ -29,9 +30,9 @@ class ExpandableV2Cubit extends Cubit<ExpandableV2State> with EventBusListener {
 
   void expand() {
     expansionTileController?.expand();
-    if (groupId != null) {
-      sendEvent<EventBus>(ExpandableWidgetEventCollapseOthers(senderId: _itemId));
-    }
+    sendEvent<EventBus>(
+      ExpandableEventExpand(data: ExpandableEventDataExpand(expandedItemId: _itemId, groupId: groupId)),
+    );
     emit(const ExpandableV2State(isExpanded: true));
   }
 

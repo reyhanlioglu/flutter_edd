@@ -7,20 +7,21 @@ class ExpandableV2 extends StatelessWidget {
   final ExpandableUIModel uiModel;
   final String? groupId;
 
-  const ExpandableV2({super.key, required this.uiModel, this.groupId});
+  ExpandableV2({super.key, required this.uiModel, this.groupId}) : _controller = ExpansionTileController();
+
+  final ExpansionTileController _controller;
 
   @override
   Widget build(BuildContext context) {
-    final expansionTileController = ExpansionTileController();
     return BlocProvider(
-      create: (context) => ExpandableV2Cubit(expansionTileController: expansionTileController, groupId: groupId),
+      create: (context) => ExpandableV2Cubit(expansionTileController: _controller, groupId: groupId),
       child: BlocBuilder<ExpandableV2Cubit, ExpandableV2State>(
         builder: (context, state) {
           return Card(
             child: Column(
               children: <Widget>[
                 ExpansionTile(
-                  controller: expansionTileController,
+                  controller: _controller,
                   title: Text(uiModel.title),
                   trailing: Icon(state.isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down),
                   initiallyExpanded: uiModel.isExpanded,

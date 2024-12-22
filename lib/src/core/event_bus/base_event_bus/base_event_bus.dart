@@ -25,8 +25,8 @@ abstract class BaseEventBus {
     dynamic receiverId,
   }) {
     return _bus.listen((data) {
-      if (data.runtimeType == BE && _canListen(data, senderId, receiverId)) {
-        onEventReceived(data as BE);
+      if (data is BE && _canListen(data, senderId, receiverId)) {
+        onEventReceived(data);
       }
     });
   }

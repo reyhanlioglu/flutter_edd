@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class ExpandableGroupWithoutEventBus extends StatefulWidget {
   final List<ExpandableUIModel> uiModels;
+
   const ExpandableGroupWithoutEventBus({super.key, required this.uiModels});
 
   @override
@@ -11,26 +12,19 @@ class ExpandableGroupWithoutEventBus extends StatefulWidget {
 }
 
 class _ExpandableGroupWithoutEventBusState extends State<ExpandableGroupWithoutEventBus> {
-  final controllers = <ExpansionTileController>[];
-
-  @override
-  void initState() {
-    super.initState();
-
-    controllers.addAll(List.generate(widget.uiModels.length, (index) => ExpansionTileController()));
-  }
+  late final controllers = List.generate(widget.uiModels.length, (index) => ExpansionTileController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        for (var i = 0; i < widget.uiModels.length; i++)
+        for (var i = 0; i < controllers.length; i++)
           ExpandableV1(
             controller: controllers[i],
             uiModel: widget.uiModels[i],
             onExpansionChanged: (isExpanded) {
               if (isExpanded) {
-                for (var j = 0; j < widget.uiModels.length; j++) {
+                for (var j = 0; j < controllers.length; j++) {
                   if (j != i) {
                     controllers[j].collapse();
                   }
