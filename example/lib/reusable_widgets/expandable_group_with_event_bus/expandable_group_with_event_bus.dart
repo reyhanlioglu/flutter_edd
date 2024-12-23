@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 class ExpandableGroupWithEventBus extends StatelessWidget {
   final List<ExpandableUIModel> uiModels;
 
-  ExpandableGroupWithEventBus({super.key, required this.uiModels});
+  ExpandableGroupWithEventBus({required this.uiModels, super.key});
 
   final String groupId = const Uuid().v1();
 

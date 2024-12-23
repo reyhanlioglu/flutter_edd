@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:example/common_events/event_ids.dart';
 import 'package:example/common_events/common_events.dart';
+import 'package:example/common_events/event_ids.dart';
 import 'package:example/core/navigation/navigation_listener_event.dart';
 import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_event.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class SearchHotelCardCubit extends Cubit<SearchHotelCardState> with EventBusList
     EventBus.instance.sendEvent(CommonEventDisplayWidget(id: EventId.displayWidgetSearchHotelCard));
   }
 
-  onSearchHotels() {
+  void onSearchHotels() {
     sendEvent(SearchHotelCardEventSearchHotels());
   }
 

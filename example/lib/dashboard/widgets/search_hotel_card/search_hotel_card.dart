@@ -1,5 +1,4 @@
 import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_cubit.dart';
-import 'package:example/hotel_selection/hotel_selection_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +10,6 @@ class SearchHotelCard extends StatefulWidget {
 }
 
 class _SearchHotelCardState extends State<SearchHotelCard> {
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

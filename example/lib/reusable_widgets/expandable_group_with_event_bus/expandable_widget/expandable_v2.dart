@@ -7,7 +7,7 @@ class ExpandableV2 extends StatelessWidget {
   final ExpandableUIModel uiModel;
   final String? groupId;
 
-  ExpandableV2({super.key, required this.uiModel, this.groupId}) : _controller = ExpansionTileController();
+  ExpandableV2({required this.uiModel, super.key, this.groupId}) : _controller = ExpansionTileController();
 
   final ExpansionTileController _controller;
 

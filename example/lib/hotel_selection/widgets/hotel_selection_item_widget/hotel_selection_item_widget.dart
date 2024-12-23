@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HotelSelectionItemWidget extends StatelessWidget {
-  const HotelSelectionItemWidget({super.key, required this.hotel});
+  const HotelSelectionItemWidget({required this.hotel, super.key});
 
   final HotelSelectionItemModel hotel;
 

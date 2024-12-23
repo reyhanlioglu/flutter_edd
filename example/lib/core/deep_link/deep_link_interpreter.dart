@@ -8,7 +8,7 @@ class DeepLinkInterpreter {
 
     final eventType = DeepLinkEventType.fromString(data['eventType']);
 
-    switch(eventType) {
+    switch (eventType) {
       case DeepLinkEventType.hotelSuggestion:
         ProcessHotelSuggestionDeepLinkEventUseCase().call(data);
         break;

@@ -13,7 +13,7 @@ class HotelSelectionItemModel {
     required this.rating,
   });
 
-  factory HotelSelectionItemModel.fromJson (Map<String, dynamic> json) {
+  factory HotelSelectionItemModel.fromJson(Map<String, dynamic> json) {
     return HotelSelectionItemModel(
       id: json['id'],
       name: json['name'],

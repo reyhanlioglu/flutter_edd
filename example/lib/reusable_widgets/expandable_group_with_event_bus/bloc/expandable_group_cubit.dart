@@ -12,18 +12,20 @@ class ExpandableGroupCubit extends Cubit<ExpandableGroupState> with EventBusList
   }
 
   void _listenCollapseOthersEvent() {
-    listenEvent<EventBus, ExpandableEventExpand>(onEventReceived: (event) {
-      if (event.data.groupId == groupId) {
-        sendEvent<EventBus>(
-          ExpandableGroupEventCollapseOthers(
-            data: ExpandableGroupEventDataCollapseOthers(
-              expandedItemId: event.data.expandedItemId,
-              groupId: groupId,
+    listenEvent<EventBus, ExpandableEventExpand>(
+      onEventReceived: (event) {
+        if (event.data.groupId == groupId) {
+          sendEvent<EventBus>(
+            ExpandableGroupEventCollapseOthers(
+              data: ExpandableGroupEventDataCollapseOthers(
+                expandedItemId: event.data.expandedItemId,
+                groupId: groupId,
+              ),
             ),
-          ),
-        );
-      }
-    });
+          );
+        }
+      },
+    );
   }
 
   @override

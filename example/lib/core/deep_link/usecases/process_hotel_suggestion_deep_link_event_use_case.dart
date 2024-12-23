@@ -1,5 +1,5 @@
-import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_event.dart';
 import 'package:example/common_events/event_ids.dart';
+import 'package:example/dashboard/widgets/search_hotel_card/bloc/search_hotel_card_event.dart';
 import 'package:example/hotel_selection/widgets/hotel_selection_item_widget/bloc/hotel_selection_item_event.dart';
 import 'package:flutter_edd/flutter_edd.dart';
 
@@ -15,7 +15,6 @@ class ProcessHotelSuggestionDeepLinkEventUseCase {
       ..sendEvent(SearchHotelCardEventSearchHotels(preconditionedEventId: EventId.searchHotelCardEventAutofillFields))
       ..sendEvent(
         SearchHotelCardEventAutofillFields(
-          id: EventId.searchHotelCardEventAutofillFields,
           data: SearchHotelCardEventDataAutofillFields(
             city: city,
             startEndDate: "$startDate - $endDate",

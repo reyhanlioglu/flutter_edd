@@ -1,11 +1,11 @@
-import 'package:example/reusable_widgets/expandable_group_without_event_bus/expandable_widget/expandable_v1.dart';
 import 'package:example/reusable_widgets/expandable_group_without_event_bus/expandable_ui_model.dart';
+import 'package:example/reusable_widgets/expandable_group_without_event_bus/expandable_widget/expandable_v1.dart';
 import 'package:flutter/material.dart';
 
 class ExpandableGroupWithoutEventBus extends StatefulWidget {
   final List<ExpandableUIModel> uiModels;
 
-  const ExpandableGroupWithoutEventBus({super.key, required this.uiModels});
+  const ExpandableGroupWithoutEventBus({required this.uiModels, super.key});
 
   @override
   State<ExpandableGroupWithoutEventBus> createState() => _ExpandableGroupWithoutEventBusState();

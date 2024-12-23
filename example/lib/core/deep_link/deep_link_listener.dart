@@ -44,13 +44,13 @@ class _DeepLinkListenerState extends State<DeepLinkListener> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-        future: init(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return Center(child: widget.child);
+      future: init(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
         }
+        return Center(child: widget.child);
+      },
     );
   }
 

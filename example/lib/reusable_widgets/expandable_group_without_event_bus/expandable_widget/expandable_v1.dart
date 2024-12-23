@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class ExpandableV1 extends StatefulWidget {
   final ExpandableUIModel uiModel;
-  final Function(bool)? onExpansionChanged;
+  final Function(bool isExpanded)? onExpansionChanged;
   final ExpansionTileController controller;
 
-  const ExpandableV1({super.key, required this.uiModel, required this.controller, this.onExpansionChanged});
+  const ExpandableV1({required this.uiModel, required this.controller, super.key, this.onExpansionChanged});
 
   @override
   State<ExpandableV1> createState() => _ExpandableV1State();

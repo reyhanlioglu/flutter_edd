@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 
-import '../event_bus/base_event_bus/base_event.dart';
-import '../event_bus/base_event_bus/base_event_bus.dart';
+import 'package:flutter_edd/src/core/event_bus/base_event_bus/base_event.dart';
+import 'package:flutter_edd/src/core/event_bus/base_event_bus/base_event_bus.dart';
 
 mixin EventBusListener<T> on BlocBase<T> {
   final List<StreamSubscription> streamSubscriptionList = [];

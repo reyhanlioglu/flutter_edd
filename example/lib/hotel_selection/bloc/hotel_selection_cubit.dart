@@ -15,7 +15,7 @@ class HotelSelectionCubit extends Cubit<HotelSelectionState> with EventBusListen
   void _listenEventBus() {
     listenEvent<EventBus, HotelSelectionRepositoryEventNotifyHotelListFetched>(
       onEventReceived: (event) {
-        final hotels = event.data.hotels.map((hotel) => HotelSelectionItemModel.fromJson(hotel)).toList();
+        final hotels = event.data.hotels.map(HotelSelectionItemModel.fromJson).toList();
         emit(HotelSelectionStateLoaded(hotels: hotels));
         sendEvent<EventBus>(CommonEventDisplayWidget(id: EventId.displayPageHotelSelection));
       },

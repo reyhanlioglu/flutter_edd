@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: globalNavigatorKey,
               initialRoute: '/dashboard',
               onGenerateRoute: (settings) {
-                final routeUri = settings.name is String ? Uri.tryParse(settings.name as String) : null;
+                final routeUri = settings.name is String ? Uri.tryParse(settings.name!) : null;
 
                 final arguments = routeUri?.queryParameters ?? {};
 
@@ -41,11 +41,13 @@ class MyApp extends StatelessWidget {
                   case '/hotel-selection':
                     return MaterialPageRoute(
                       builder: (context) => HotelSelectionPage(
-                        city: arguments['city'] as String,
-                        dateRange: arguments['dateRange'] as String,
-                        numberOfPeople: int.parse(arguments['numberOfPeople'] as String),
+                        city: arguments['city']!,
+                        dateRange: arguments['dateRange']!,
+                        numberOfPeople: int.parse(arguments['numberOfPeople']!),
                       ),
                     );
+                  default:
+                    return null;
                 }
               },
             ),

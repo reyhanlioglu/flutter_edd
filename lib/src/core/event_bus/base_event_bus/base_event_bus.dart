@@ -32,16 +32,19 @@ abstract class BaseEventBus {
   }
 
   bool _canListen(data, dynamic senderId, dynamic receiverId) {
-    return (senderId == null || (data.senderId != null && data.senderId == senderId)) &&
-        ((receiverId == null && data.receiverId == null) || (data.receiverId != null && data.receiverId == receiverId));
+    return (senderId == null ||
+            (data.senderId != null && data.senderId == senderId)) &&
+        ((receiverId == null && data.receiverId == null) ||
+            (data.receiverId != null && data.receiverId == receiverId));
   }
 
   void _checkForAwaitingEventsPreconditionsMet(BaseEvent event) {
-    final awaitingEvents = _asyncEventQueue
-        .where((element) => element.preconditionedEventId != null && element.preconditionedEventId == event.id)
-        .toList();
-
-    awaitingEvents.forEach((awaitingEvent) => awaitingEvent.setPreconditionsMet(true));
+    _asyncEventQueue
+        .where((element) =>
+            element.preconditionedEventId != null &&
+            element.preconditionedEventId == event.id)
+        .toList()
+        .forEach((awaitingEvent) => awaitingEvent.setPreconditionsMet(true));
   }
 
   void _processAwaitingEvents(BaseEvent<dynamic, dynamic> event) {
@@ -50,7 +53,8 @@ abstract class BaseEventBus {
     while (!allAwaitingEventsProcessed) {
       final awaitingEvents = _asyncEventQueue.where(
         (element) {
-          return element.preconditionedEventId != null && element.isPreconditionsMet;
+          return element.preconditionedEventId != null &&
+              element.isPreconditionsMet;
         },
       ).toList();
 

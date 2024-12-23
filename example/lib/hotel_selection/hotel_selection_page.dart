@@ -1,12 +1,8 @@
-import 'package:example/common_events/common_events.dart';
-import 'package:example/common_events/event_ids.dart';
 import 'package:example/hotel_selection/bloc/hotel_selection_cubit.dart';
 import 'package:example/hotel_selection/repository/hotel_selection_repository.dart';
 import 'package:example/hotel_selection/widgets/hotel_selection_item_widget/hotel_selection_item_widget.dart';
-import 'package:example/hotel_selection/widgets/hotel_selection_item_widget/models/hotel_selection_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_edd/flutter_edd.dart';
 
 class HotelSelectionPage extends StatelessWidget {
   final String city;

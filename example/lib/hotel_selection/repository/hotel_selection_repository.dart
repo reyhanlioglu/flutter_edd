@@ -32,7 +32,7 @@ class HotelSelectionRepository extends Cubit with EventBusListener {
             },
             {
               'id': 217,
-              'name': 'Claridge\'s',
+              'name': "Claridge's",
               'location': 'London, UK',
               'price': 400,
               'rating': 4.7,
@@ -74,7 +74,7 @@ class HotelSelectionRepository extends Cubit with EventBusListener {
             },
             {
               'id': 229,
-              'name': 'Brown\'s Hotel',
+              'name': "Brown's Hotel",
               'location': 'London, UK',
               'price': 310,
               'rating': 4.5,

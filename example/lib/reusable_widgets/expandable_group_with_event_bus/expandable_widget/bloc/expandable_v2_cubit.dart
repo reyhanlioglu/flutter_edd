@@ -21,11 +21,13 @@ class ExpandableV2Cubit extends Cubit<ExpandableV2State> with EventBusListener {
     if (groupId == null) {
       return;
     }
-    listenEvent<EventBus, ExpandableGroupEventCollapseOthers>(onEventReceived: (event) {
-      if (event.data.expandedItemId != _itemId && event.data.groupId.startsWith(groupId!)) {
-        _collapse();
-      }
-    });
+    listenEvent<EventBus, ExpandableGroupEventCollapseOthers>(
+      onEventReceived: (event) {
+        if (event.data.expandedItemId != _itemId && event.data.groupId.startsWith(groupId!)) {
+          _collapse();
+        }
+      },
+    );
   }
 
   void expand() {
