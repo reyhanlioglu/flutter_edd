@@ -2,6 +2,7 @@ import 'package:example/core/deep_link/deep_link_listener.dart';
 import 'package:example/core/navigation/navigation_listener_cubit.dart';
 import 'package:example/dashboard/dashboard_page.dart';
 import 'package:example/hotel_selection/hotel_selection_page.dart';
+import 'package:example/personal_information/personal_information_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
                         numberOfPeople: int.parse(arguments['numberOfPeople']!),
                       ),
                     );
+                  case '/personal-information':
+                    return MaterialPageRoute(builder: (context) => const PersonalInformationPage());
                   default:
                     return null;
                 }

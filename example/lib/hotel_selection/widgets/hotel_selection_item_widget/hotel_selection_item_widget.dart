@@ -16,22 +16,25 @@ class HotelSelectionItemWidget extends StatelessWidget {
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
-            child: Card(
-              shape: state.isHighlighted
-                  ? RoundedRectangleBorder(
-                      side: const BorderSide(color: Colors.green, width: 2.0),
-                      borderRadius: BorderRadius.circular(4.0),
-                    )
-                  : null,
-              child: ListTile(
-                title: Text(hotel.name),
-                subtitle: Text('${hotel.location} - \$${hotel.price} per night'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const Icon(Icons.star, color: Colors.amber),
-                    Text(hotel.rating.toString()),
-                  ],
+            child: InkWell(
+              onTap: ()=>context.read<HotelSelectionItemCubit>().onItemSelected(),
+              child: Card(
+                shape: state.isHighlighted
+                    ? RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.green, width: 2.0),
+                        borderRadius: BorderRadius.circular(4.0),
+                      )
+                    : null,
+                child: ListTile(
+                  title: Text(hotel.name),
+                  subtitle: Text('${hotel.location} - \$${hotel.price} per night'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Icon(Icons.star, color: Colors.amber),
+                      Text(hotel.rating.toString()),
+                    ],
+                  ),
                 ),
               ),
             ),
